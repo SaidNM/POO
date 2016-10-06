@@ -14,10 +14,13 @@ public class Cuenta {
     
    
     public void depositar(double monto){
-    this.saldo=this.saldo+monto;
+        if (monto>0){
+        this.saldo+=monto;
+        }
     }
     public void retirar(double monto){
+        if(monto<=saldo){
     this.saldo=this.saldo-monto;
     }
-    
+    }    
 }
