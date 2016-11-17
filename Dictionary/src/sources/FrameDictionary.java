@@ -1,6 +1,8 @@
 
 package sources;
 
+import com.sun.glass.events.KeyEvent;
+
 
 
 public class FrameDictionary extends javax.swing.JFrame {
@@ -12,7 +14,29 @@ public class FrameDictionary extends javax.swing.JFrame {
         this.dictionary= new Dictionary();
     }
 
-   
+private void translate(){
+
+try{
+        if(RButtonEnglish.isSelected()){
+           for (Word word : dictionary.getDictionary()) {
+                if(word.getEnglish().equals(jTextFieldTranslate.getText().toLowerCase())){
+                    jLabelTr.setText(word.getSpanish());
+                }  
+            }
+        }
+        if(RButtonSpanish.isSelected()){
+            for (Word word : dictionary.getDictionary()) {
+                if(word.getSpanish().equals(jTextFieldTranslate.getText().toLowerCase())){
+                    jLabelTr.setText(word.getEnglish());
+                }  
+            }
+
+        }      
+}     
+catch(Exception e){
+jLabelTr.setText("Diccionario vacio");
+}
+}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -58,6 +82,11 @@ public class FrameDictionary extends javax.swing.JFrame {
         jTextFieldTranslate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldTranslateActionPerformed(evt);
+            }
+        });
+        jTextFieldTranslate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldTranslateKeyReleased(evt);
             }
         });
 
@@ -109,7 +138,7 @@ public class FrameDictionary extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldTranslate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelTr, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -123,7 +152,7 @@ public class FrameDictionary extends javax.swing.JFrame {
                     .addComponent(jTextFieldEnglish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(3, 3, 3)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ButtonAdd)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
@@ -145,26 +174,7 @@ public class FrameDictionary extends javax.swing.JFrame {
     }//GEN-LAST:event_RButtonEnglishActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-try{
-        if(RButtonEnglish.isSelected()){
-           for (Word word : dictionary.getDictionary()) {
-                if(word.getEnglish().equals(jTextFieldTranslate.getText().toLowerCase())){
-                    jLabelTr.setText(word.getSpanish());
-                }  
-            }
-        }
-        if(RButtonSpanish.isSelected()){
-            for (Word word : dictionary.getDictionary()) {
-                if(word.getSpanish().equals(jTextFieldTranslate.getText().toLowerCase())){
-                    jLabelTr.setText(word.getEnglish());
-                }  
-            }
-
-        }      
-}     
-catch(Exception e){
-jLabelTr.setText("Diccionario vacio");
-}
+        translate();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void ButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAddActionPerformed
@@ -177,6 +187,13 @@ jLabelTr.setText("Diccionario vacio");
     private void jTextFieldTranslateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTranslateActionPerformed
 
     }//GEN-LAST:event_jTextFieldTranslateActionPerformed
+
+    private void jTextFieldTranslateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTranslateKeyReleased
+       char keyTyped = evt.getKeyChar();
+       if(keyTyped==KeyEvent.VK_ENTER){
+        translate();
+       }
+    }//GEN-LAST:event_jTextFieldTranslateKeyReleased
 
   
     public static void main(String args[]) {
